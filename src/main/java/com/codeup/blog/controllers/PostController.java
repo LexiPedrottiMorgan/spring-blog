@@ -12,7 +12,7 @@ public class PostController {
 //  posts page:
     @GetMapping("/posts")
     @ResponseBody
-    public String postsPage() {
+    public String all() {
         return "posts index page";
     }
 
@@ -20,7 +20,7 @@ public class PostController {
 //  individual post page:
     @GetMapping("/posts/{id}")
     @ResponseBody
-    public String individualPost(@PathVariable int id) {
+    public String show(@PathVariable long id) {
         return "view an individual post id number: " + id;
     }
 
@@ -28,7 +28,7 @@ public class PostController {
 //  view form to create a post:
     @GetMapping("/posts/create")
     @ResponseBody
-    public String createPost() {
+    public String showForm() {
         return "view the form for creating a post";
     }
 
@@ -36,7 +36,7 @@ public class PostController {
 //  create a new post:
     @PostMapping("/posts/create")
     @ResponseBody
-    public String submitNewPost() {
+    public String create() {
         return "create a new post";
     }
 
