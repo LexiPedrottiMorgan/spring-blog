@@ -17,7 +17,7 @@
                     <div class="card-body">
                         <h3 class="fancy-serif">Title: <span th:text="${post.title}"></span></h3>
                         <p>Body: <span th:text="${post.body}"></span></p>
-                        <a href="/posts/${post.id}" class="btn btn-sm btn-outline-secondary btn-block">Read Post</a>
+                        <a th:href="@{'/posts/' + ${post.id}}" class="btn btn-sm btn-outline-secondary btn-block">Read Post</a>
                     </div>
                 </div>
             </div>
