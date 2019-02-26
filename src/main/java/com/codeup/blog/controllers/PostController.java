@@ -1,5 +1,6 @@
 package com.codeup.blog.controllers;
-
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,6 +40,7 @@ public class PostController {
     public String create() {
         return "create a new post";
     }
+
 
 
 // closes the class:
