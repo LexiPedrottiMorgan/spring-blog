@@ -1,12 +1,14 @@
 package com.codeup.blog.posts;
 
-public class Posts {
+public class Post {
     private String title;
     private String body;
+    private long id;
 
-    public Posts(String title, String body) {
+    public Post(String title, String body, long id) {
         this.title = title;
         this.body = body;
+        this.id = id;
     }
 
     public String getTitle() {
@@ -25,4 +27,11 @@ public class Posts {
         this.body = body;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 }

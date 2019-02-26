@@ -5,15 +5,16 @@
 
 <body>
 <div th:replace="fragments/navbar :: navbar"></div>
+<div class="container">
+    <h1>Dice Roll: <span th:text="${random}"></span></h1>
+    <h3>Your guess: <span th:text="${guess}"></span></h3>
 
-<h1>Dice Roll: <span th:text="${random}"></span></h1>
-<h3>Your guess: <span th:text="${guess}"></span></h3>
-
-<div th:if="${guessedNumber}">
-    <h1>Congrats, you guessed the number!!</h1>
-</div>
-<div th:if="${!guessedNumber}">
-    <h3>You guessed incorrectly.</h3>
+    <div th:if="${guessedNumber}">
+        <h1>Congrats, you guessed the number!!</h1>
+    </div>
+    <div th:if="${!guessedNumber}">
+        <h3>You guessed incorrectly.</h3>
+    </div>
 </div>
 </body>
 </html>

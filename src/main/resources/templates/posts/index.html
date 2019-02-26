@@ -6,8 +6,14 @@
 <body>
 <div th:replace="fragments/navbar :: navbar"></div>
 
-<h1>This will display all of the posts</h1>
+<div class="container">
+    <h1>This will display all of the posts</h1>
 
+    <div th:each="post : ${postList}">
+        <h4>Title: <span th:text="${post.title}"></span></h4>
+        <p>Title: <span th:text="${post.body}"></span></p>
+    </div>
+</div>
 
 </body>
 </html>

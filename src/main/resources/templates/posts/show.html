@@ -6,6 +6,15 @@
 <body>
 <div th:replace="fragments/navbar :: navbar"></div>
 
-<h1>This will show the single post with id: <span th:text="${id}"></h1>
+<h1>This will show the single post page</h1>
+
+    <div class="container">
+        <h3>Title</h3>
+        <p><span th:text="${postToView.title}"></span></p>
+
+        <h3>Body</h3>
+        <p><span th:text="${postToView.body}"></span></p>
+    </div>
 </body>
 </html>
+
