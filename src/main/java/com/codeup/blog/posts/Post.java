@@ -4,11 +4,13 @@ public class Post {
     private String title;
     private String body;
     private long id;
+    private String image;
 
-    public Post(String title, String body, long id) {
+    public Post(String title, String body, long id, String image) {
         this.title = title;
         this.body = body;
         this.id = id;
+        this.image = image;
     }
 
     public String getTitle() {
@@ -33,5 +35,13 @@ public class Post {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

@@ -21,11 +21,13 @@ public class PostController {
 //    create a list:
         List<Post> postList = new ArrayList<>();
 //    create ad objects:
-        Post post1 = new Post("Title 1", "This is the body of Test 1", 1);
-        Post post2 = new Post("Title 2", "This is the body of Test 2", 2);
+        Post post1 = new Post("Title 1", "This is the body of Test 1", 1, "/img/computer.jpg");
+        Post post2 = new Post("Title 2", "This is the body of Test 2", 2, "/img/board-circuit.jpg");
+        Post post3 = new Post("Title 3", "This is the body of Test 3", 2, "/img/man.jpg");
 //    add the post objects to the list:
         postList.add(post1);
         postList.add(post2);
+        postList.add(post3);
 //    send the list of post objects to the view:
         model.addAttribute("postList", postList);
         return "posts/index";
@@ -35,19 +37,13 @@ public class PostController {
 //  individual post page:
     @GetMapping("/posts/{id}")
     public String show(@PathVariable long id, Model model) {
-        Post postToView = new Post("Single Post Tester Title", "This is the tester body. This is a test blog post to show a single posts page.", id);
+        Post postToView = new Post("Single Post Tester Title", "This is the tester body. This is a test blog post to show a single posts page.", id, "/img/computer.jpg");
         String title = postToView.getTitle();
         String body = postToView.getBody();
         model.addAttribute("postToView", postToView);
         model.addAttribute("title", title);
         model.addAttribute("body", body);
         return "/posts/show";
-    }
-
-// send to profile
-    @GetMapping("/profile")
-        public String usersProfile(){
-            return "profile";
     }
 
 

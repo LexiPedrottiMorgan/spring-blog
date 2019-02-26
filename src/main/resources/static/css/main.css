@@ -1,0 +1,12 @@
+h1 {
+    font-family: 'Playfair Display', serif;
+}
+
+.fancy-serif {
+    font-family: 'Playfair Display', serif;
+}
+
+/*figure out how to override bootstrap css*/
+#bootstrap-overrides .card {
+    border-radius: 0;
+}
