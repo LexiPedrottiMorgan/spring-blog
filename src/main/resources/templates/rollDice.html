@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
 
-</head>
+<head th:replace="fragments/header :: header('Roll the Dice')"></head>
+
 <body>
+<div th:replace="fragments/navbar :: navbar"></div>
+
 <h1>Pick a number</h1>
 <!--turn these into anchor tags-->
 

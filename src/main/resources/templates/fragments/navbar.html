@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="header(title)">
+    <meta charset="UTF-8" />
+    <title th:text="${title}"></title>
+</head>
+<body>
+<h1>This is a template for the Navbar</h1>
+
+
+<th:block th:fragment="navbar">
+    <nav>
+        <ul>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/roll-dice}">Roll the Dice</a></li>
+            <li><a th:href="@{/posts}">View All Posts</a></li>
+            <li><a th:href="@{/posts/create}">Create Post</a></li>
+        </ul>
+    </nav>
+</th:block>
+</body>
+</html>

@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <title>Title</title>
-</head>
+
+<head th:replace="fragments/header :: header('Roll Results')"></head>
+
 <body>
+<div th:replace="fragments/navbar :: navbar"></div>
+
 <h1>Dice Roll: <span th:text="${random}"></span></h1>
 <h3>Your guess: <span th:text="${guess}"></span></h3>
 
