@@ -12,19 +12,24 @@
     <div th:each="post : ${posts}">
         <div class="row">
             <div class="col-lg-8 col-12">
-                <div class="card m-3" style="width: 100%;">
-                    <!--TODO: add images in-->
-                    <img th:src="/tmp/IMG_7212.jpg" class="card-img-top" alt="computer" />
+                <div class="card card-cascade narrower m-3 rare-wind-gradient">
+                     <div class="card m-3" style="width: 100%;">
+                         <div class="img-gradient">
+                        <img src="/img/computer.jpg" class="card-img-top img-fluid" alt="computer" />
+                         </div>
                     <div class="card-body">
                         <h3 class="fancy-serif"><span th:text="${post.title}"></span></h3>
+                        <hr />
                         <p><span th:text="${post.body}"></span></p>
-                        <a th:href="@{'/posts/' + ${post.id}}" class="btn btn-sm btn-outline-primary">Read</a>
-                        <form th:action="@{/posts/edit}" th:method="get">
-                            <button th:value="${post.id}" th:name="id" class="btn btn-sm btn-outline-warning">Edit</button>
-                        </form>
-                        <form th:action="@{/posts/delete}" th:method="post">
-                            <button th:value="${post.id}" th:name="id" class="btn btn-sm btn-outline-danger">Delete</button>
-                        </form>
+                        <div class="btn-container">
+                        <a th:href="@{'/posts/' + ${post.id}}" class="btn btn-sm purple-gradient">Read</a>
+                            <form th:action="@{/posts/edit}" th:method="get">
+                                <button th:value="${post.id}" th:name="id" class="btn btn-sm aqua-gradient">Edit</button>
+                            </form>
+                            <form th:action="@{/posts/delete}" th:method="post">
+                                <button th:value="${post.id}" th:name="id" class="btn btn-sm peach-gradient">Delete</button>
+                            </form>
+                        </div>
 
                     </div>
                 </div>
@@ -32,6 +37,8 @@
         </div>
     </div>
 </div>
+</div>
+
 
 </body>
 </html>

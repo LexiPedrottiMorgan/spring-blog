@@ -3,6 +3,7 @@ import com.codeup.blog.posts.Post;
 import com.codeup.blog.posts.PostRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -55,9 +56,23 @@ public class PostController {
     @PostMapping("/posts/create")
     public String create(@RequestParam(name= "title") String title, @RequestParam(name="body") String body) {
         Post newPost = new Post(title, body);
-        postDao.save(newPost);
+        System.out.println(newPost);
+//        postDao.save(newPost);
         return "redirect:/posts";
     }
+
+//    Trying to create with a file uploaded: not finished
+//    @PostMapping("/posts/create")
+//    public String create(@RequestParam(name= "title") String title, @RequestParam(name="body") String body, Path image) {
+//        image = path;
+//        String imageString = image.toString();
+//        System.out.println(imageString);
+//
+//        Post newPost = new Post(title, body, imageString);
+//        System.out.println(newPost);
+////        postDao.save(newPost);
+//        return "redirect:/posts";
+//    }
 
 
     @GetMapping("/posts/delete")
@@ -89,17 +104,32 @@ public class PostController {
         editedPost.setTitle(title);
         editedPost.setBody(body);
         postDao.save(editedPost);
-        return "redirect:/posts";
+        return "redirect:/posts/" + id;
     }
 
 
 //    IMAGE UPLOADING:
-        private static String UPLOADED_FOLDER = "/tmp/";
+
+//    @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
+//    public String submit(@RequestParam("file") MultipartFile file, ModelMap modelMap) {
+//        modelMap.addAttribute("file", file);
+//        return "fileUploadView";
+//    }
+
+        private static String UPLOADED_FOLDER = "/static/uploaded-img/";
+
+        @GetMapping("/upload")
+        public String index() {
+            return "upload";
+        }
 
 
+//Path is out here so that it can be accessed in the create method
+        Path path;
         @PostMapping("/upload")
         public String singleFileUpload(@RequestParam("file") MultipartFile file,
                                        RedirectAttributes redirectAttributes) {
+
 
             if (file.isEmpty()) {
                 redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
@@ -110,7 +140,7 @@ public class PostController {
 
                 // Get the file and save it somewhere
                 byte[] bytes = file.getBytes();
-                Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
+                path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
                 Files.write(path, bytes);
 
 

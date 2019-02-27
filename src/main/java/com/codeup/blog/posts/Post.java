@@ -15,8 +15,8 @@ public class Post {
 
 
 //  TODO:add in feature to upload images:
-//    @Column(length=250)
-//    private String image;
+    @Column
+    private String image;
 
 
 //  default constructor
@@ -25,6 +25,12 @@ public class Post {
     public Post(String title, String body) {
         this.title = title;
         this.body = body;
+    }
+
+    public Post(String title, String body, String image) {
+        this.title = title;
+        this.body = body;
+        this.image = image;
     }
 
     public Post(String title, String body, long id) {
@@ -58,11 +64,11 @@ public class Post {
         this.id = id;
     }
 
-//    public String getImage() {
-//        return image;
-//    }
-//
-//    public void setImage(String image) {
-//        this.image = image;
-//    }
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 }

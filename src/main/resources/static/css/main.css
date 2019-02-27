@@ -6,17 +6,17 @@ h1 {
     font-family: 'Playfair Display', serif;
 }
 
-
-/*!*figure out how to override bootstrap css*!*/
-/*#bootstrap-overrides .card {*/
-    /*border-radius: 0;*/
-/*}*/
+.btn-container {
+    display: flex;
+    justify-content: space-evenly;
+}
 
 
 .image-header {
     width: auto;
 }
 
-
-
-/*TODO: the css is linked because the font is applied but the background color and image size are not being applied*/
+.btn-round {
+    border-radius: 50%;
+    font-size: 5em;
+}

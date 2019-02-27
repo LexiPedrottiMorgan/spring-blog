@@ -19,7 +19,7 @@
             <textarea name="body" type="text" class="form-control" id="body" th:text="${post.body}"></textarea>
         </div>
         <form th:action="@{/posts/edit}" th:method="post">
-            <button th:value="${post.id}" th:name="id" class="btn btn-sm btn-outline-danger">Save Changes</button>
+            <button th:value="${post.id}" th:name="id" class="btn peach-gradient">Save Changes</button>
         </form>
     </form>
 </div>
