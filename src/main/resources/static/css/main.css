@@ -6,7 +6,17 @@ h1 {
     font-family: 'Playfair Display', serif;
 }
 
-/*figure out how to override bootstrap css*/
-#bootstrap-overrides .card {
-    border-radius: 0;
+
+/*!*figure out how to override bootstrap css*!*/
+/*#bootstrap-overrides .card {*/
+    /*border-radius: 0;*/
+/*}*/
+
+
+.image-header {
+    width: auto;
 }
+
+
+
+/*TODO: the css is linked because the font is applied but the background color and image size are not being applied*/

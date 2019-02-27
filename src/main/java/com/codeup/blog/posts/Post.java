@@ -1,17 +1,38 @@
 package com.codeup.blog.posts;
+import javax.persistence.*;
 
+@Entity
+@Table(name="posts")
 public class Post {
-    private String title;
-    private String body;
+    @Id @GeneratedValue
     private long id;
-    private String image;
 
-    public Post(String title, String body, long id, String image) {
+    @Column(nullable=false, length=150)
+    private String title;
+
+    @Column(nullable=false)
+    private String body;
+
+
+//  TODO:add in feature to upload images:
+//    @Column(length=250)
+//    private String image;
+
+
+//  default constructor
+    public Post(){}
+
+    public Post(String title, String body) {
+        this.title = title;
+        this.body = body;
+    }
+
+    public Post(String title, String body, long id) {
         this.title = title;
         this.body = body;
         this.id = id;
-        this.image = image;
     }
+
 
     public String getTitle() {
         return title;
@@ -37,11 +58,11 @@ public class Post {
         this.id = id;
     }
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
+//    public String getImage() {
+//        return image;
+//    }
+//
+//    public void setImage(String image) {
+//        this.image = image;
+//    }
 }

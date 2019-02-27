@@ -1,13 +1,11 @@
 package com.codeup.blog.controllers;
 import com.codeup.blog.posts.Post;
+import com.codeup.blog.posts.PostRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,21 +13,18 @@ import java.util.List;
 @Controller
 public class PostController {
 
+    private final PostRepository postDao;
+
+    public PostController(PostRepository postDao){
+        this.postDao = postDao;
+    }
+
+
     //  posts page:
     @GetMapping("/posts")
     public String all(Model model) {
-//    create a list:
-        List<Post> postList = new ArrayList<>();
-//    create ad objects:
-        Post post1 = new Post("Title 1", "This is the body of Test 1", 1, "/img/computer.jpg");
-        Post post2 = new Post("Title 2", "This is the body of Test 2", 2, "/img/board-circuit.jpg");
-        Post post3 = new Post("Title 3", "This is the body of Test 3", 2, "/img/man.jpg");
-//    add the post objects to the list:
-        postList.add(post1);
-        postList.add(post2);
-        postList.add(post3);
-//    send the list of post objects to the view:
-        model.addAttribute("postList", postList);
+        Iterable<Post> posts = postDao.findAll();
+        model.addAttribute("posts", posts);
         return "posts/index";
     }
 
@@ -37,28 +32,49 @@ public class PostController {
 //  individual post page:
     @GetMapping("/posts/{id}")
     public String show(@PathVariable long id, Model model) {
-        Post postToView = new Post("Single Post Tester Title", "This is the tester body. This is a test blog post to show a single posts page.", id, "/img/computer.jpg");
-        String title = postToView.getTitle();
-        String body = postToView.getBody();
-        model.addAttribute("postToView", postToView);
-        model.addAttribute("title", title);
-        model.addAttribute("body", body);
-        return "/posts/show";
+        Post post = postDao.findOne(id);
+        model.addAttribute("post", post);
+        return "posts/show";
     }
 
 
 //  view form to create a post:
     @GetMapping("/posts/create")
     public String showForm() {
-        return "/posts/create";
+        return "posts/create";
     }
 
 
 //  create a new post:
     @PostMapping("/posts/create")
-    @ResponseBody
-    public String create() {
-        return "created a new post";
+    public String create(@RequestParam(name= "title") String title, @RequestParam(name="body") String body) {
+        Post newPost = new Post(title, body);
+        postDao.save(newPost);
+        return "redirect:/posts";
+
+
+//     TODO:add in feature to upload images:
+//    // if no image is uploaded then apply the default placeholder image:
+//        if(image==null){
+//            image = "/img/computer.jpg";
+//        }
+    }
+
+
+
+
+    @GetMapping("/posts/delete")
+    public String getPostToDelete(@RequestParam(name="id") long id, Model model){
+        Post post = postDao.findOne(id);
+        model.addAttribute("post", post);
+        return "posts/delete";
+    }
+
+    @PostMapping("/posts/delete")
+    public String delete(@RequestParam(name="id") long id){
+        Post deleteThis = postDao.findOne(id);
+        postDao.delete(deleteThis);
+        return "posts/delete-success";
     }
 
 

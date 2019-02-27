@@ -5,15 +5,16 @@
 
 <body>
 <div th:replace="fragments/navbar :: navbar"></div>
-
-<h1>This will show the single post page</h1>
-
+<div>
+    <!--TODO: add in images-->
+     <!--<img th:src="${post.image}" class="image-header" alt="computer" />-->
+</div>
     <div class="container">
-        <h3>Title</h3>
-        <p><span th:text="${postToView.title}"></span></p>
+        <p>Title:</p>
+        <h2><span th:text="${post.title}"></span></h2>
 
-        <h3>Body</h3>
-        <p><span th:text="${postToView.body}"></span></p>
+        <p>Body:</p>
+        <p><span th:text="${post.body}"></span></p>
     </div>
 </body>
 </html>
