@@ -11,10 +11,10 @@
 
     <div th:each="post : ${posts}">
         <div class="row">
-            <div class="col-4">
-                <div class="card m-3" style="width: 50rem;">
+            <div class="col-lg-8 col-12">
+                <div class="card m-3" style="width: 100%;">
                     <!--TODO: add images in-->
-                    <!--<img th:src="${post.image}" class="card-img-top" alt="computer" />-->
+                    <img th:src="/tmp/IMG_7212.jpg" class="card-img-top" alt="computer" />
                     <div class="card-body">
                         <h3 class="fancy-serif"><span th:text="${post.title}"></span></h3>
                         <p><span th:text="${post.body}"></span></p>

@@ -18,12 +18,12 @@
                 <label for="body">Body</label>
                 <textarea name="body" type="text" class="form-control" id="body" placeholder="Enter post body here"/>
             </div>
-            <!--TODO:add in feature to upload images:-->
-            <!--<div class="form-group">-->
-                <!--<label for="image">Upload an Image</label>-->
-                <!--<input name="image" type="file" class="form-control-file" id="image" />-->
-            <!--</div>-->
-            <button type="submit" class="btn btn-primary">Create</button>
+
+            <!--image upload-->
+            <form method="POST" action="/upload" enctype="multipart/form-data">
+                <input type="file" name="file" /><br/><br/>
+                <button type="submit" class="btn btn-primary">Create</button>
+            </form>
         </form>
 </div>
 
