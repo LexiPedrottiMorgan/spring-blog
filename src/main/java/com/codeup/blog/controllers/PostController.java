@@ -61,8 +61,6 @@ public class PostController {
     }
 
 
-
-
     @GetMapping("/posts/delete")
     public String getPostToDelete(@RequestParam(name="id") long id, Model model){
         Post post = postDao.findOne(id);
@@ -75,6 +73,24 @@ public class PostController {
         Post deleteThis = postDao.findOne(id);
         postDao.delete(deleteThis);
         return "posts/delete-success";
+    }
+
+
+    @GetMapping("/posts/edit")
+    public String editForm(@RequestParam(name="id") long id, Model model){
+        Post editThisPost = postDao.findOne(id);
+        model.addAttribute("post", editThisPost);
+        return "posts/edit";
+    }
+
+
+    @PostMapping("/posts/edit")
+    public String edit(@RequestParam(name="id") long id, @RequestParam(name= "title") String title, @RequestParam(name="body") String body){
+        Post editedPost = postDao.findOne(id);
+        editedPost.setTitle(title);
+        editedPost.setBody(body);
+        postDao.save(editedPost);
+        return "redirect:/posts";
     }
 
 

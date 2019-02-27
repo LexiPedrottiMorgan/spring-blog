@@ -12,14 +12,16 @@
     <div th:each="post : ${posts}">
         <div class="row">
             <div class="col-4">
-                <div class="card m-3" style="width: 25rem;">
+                <div class="card m-3" style="width: 50rem;">
                     <!--TODO: add images in-->
                     <!--<img th:src="${post.image}" class="card-img-top" alt="computer" />-->
                     <div class="card-body">
                         <h3 class="fancy-serif"><span th:text="${post.title}"></span></h3>
                         <p><span th:text="${post.body}"></span></p>
-                        <a th:href="@{'/posts/' + ${post.id}}" class="btn btn-sm btn-outline-secondary">Read</a>
-
+                        <a th:href="@{'/posts/' + ${post.id}}" class="btn btn-sm btn-outline-primary">Read</a>
+                        <form th:action="@{/posts/edit}" th:method="get">
+                            <button th:value="${post.id}" th:name="id" class="btn btn-sm btn-outline-warning">Edit</button>
+                        </form>
                         <form th:action="@{/posts/delete}" th:method="post">
                             <button th:value="${post.id}" th:name="id" class="btn btn-sm btn-outline-danger">Delete</button>
                         </form>
