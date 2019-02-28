@@ -6,11 +6,38 @@
 <body>
 <div th:replace="fragments/navbar :: navbar"></div>
 
+<!--Section: Testimonials-->
+<section class="text-center">
 
-<div class="container">
-    <h1>Welcome, <span th:text="${user.username}"></span></h1>
-   <img th:src="${'/uploaded-img/' + user.profilePicture}"/>
+        <!--Grid column-->
+        <div class="col-lg-4 col-md-6 mb-4">
 
-</div>
+            <!--Card-->
+                <!--Background color-->
+                <div class="card-up rainy-ashville-gradient">
+                    <div class="card testimonial-card">
+                </div>
+
+                <!--Avatar-->
+                <div class="avatar mx-auto image-cropper"><img th:src="${'/uploaded-img/' + user.profilePicture}" class="image-avatar img-responsive" alt="Example photo" />
+                </div>
+
+                <div class="card-body">
+                    <!--Name-->
+                    <h4 class="card-title mt-1"><span th:text="${user.username}"></span></h4>
+                    <hr />
+                    <!--Quotation-->
+                    <p><i class="fas fa-quote-left"></i> Neque cupiditate assumenda in maiores repudiandae mollitia architecto. <i class="fas fa-quote-right"></i></p>
+                </div>
+
+            </div>
+            <!--Card-->
+
+    </div>
+
+</section>
+<!--Section: Testimonials-->
+
+
 </body>
 </html>
