@@ -56,7 +56,7 @@ public class PostController {
 
 
 //  create a new post with an image upload:
-
+//  this is the file upload path to be used in uploading post pictures:
     @Value("${post-file-upload-path}")
     private String uploadPath;
 
@@ -107,18 +107,27 @@ public class PostController {
 
 
     @PostMapping("/posts/edit")
-    public String edit(@RequestParam(name="id") long id, @RequestParam(name= "title") String title, @RequestParam(name="body") String body){
+    public String edit(@RequestParam(name="id") long id, @RequestParam(name= "title") String title, @RequestParam(name="body") String body, @RequestParam(name = "file") MultipartFile uploadedFile, Model model){
         Post editedPost = postDao.findOne(id);
+
+        String filename = uploadedFile.getOriginalFilename();
+        String filepath = Paths.get(uploadPath, filename).toString();
+        File destinationFile = new File(filepath);
+
+        try {
+            uploadedFile.transferTo(destinationFile);
+            model.addAttribute("message", "File successfully uploaded!");
+        } catch (IOException e) {
+            e.printStackTrace();
+            model.addAttribute("message", "Oops! Something went wrong! " + e);
+        }
+
+        editedPost.setImage(filename);
         editedPost.setTitle(title);
         editedPost.setBody(body);
         postDao.save(editedPost);
         return "redirect:/posts/" + id;
     }
-
-
-
-
-
 
 
 // closes the class:
