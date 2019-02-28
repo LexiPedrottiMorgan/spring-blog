@@ -9,7 +9,7 @@
 
 <div class="container">
     <h1>Create a new post:</h1>
-        <form th:action="@{/posts/create}" method="post">
+        <form th:action="@{/posts/create}" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="title">Title</label>
                 <input name="title" type="text" class="form-control" id="title" placeholder="Enter title"/>
@@ -20,10 +20,9 @@
             </div>
 
             <!--image upload-->
-            <form method="POST" action="/upload" enctype="multipart/form-data">
                 <input type="file" name="file" /><br/><br/>
+            <!--submit post to db:-->
                 <input type="submit" class="btn btn-primary" value="create"/>
-            </form>
         </form>
 </div>
 

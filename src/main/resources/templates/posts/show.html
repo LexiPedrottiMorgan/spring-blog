@@ -6,9 +6,8 @@
 <body>
 <div th:replace="fragments/navbar :: navbar"></div>
 <div>
-    <!--TODO: add in images-->
-     <!--<img th:src="${post.image}" class="image-header" alt="computer" />-->
 </div>
+<img th:src="${'/uploaded-img/posts/' + post.image}"/>
     <div class="container">
         <p>Title:</p>
         <h2><span th:text="${post.title}"></span></h2>

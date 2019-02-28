@@ -1,6 +1,8 @@
 package com.codeup.blog.controllers;
 import com.codeup.blog.posts.Post;
 import com.codeup.blog.posts.PostRepository;
+import com.codeup.blog.users.User;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -52,27 +55,32 @@ public class PostController {
     }
 
 
-//  create a new post:
+//  create a new post with an image upload:
+
+    @Value("${post-file-upload-path}")
+    private String uploadPath;
+
     @PostMapping("/posts/create")
-    public String create(@RequestParam(name= "title") String title, @RequestParam(name="body") String body) {
-        Post newPost = new Post(title, body);
+    public String create(@RequestParam(name= "title") String title, @RequestParam(name="body") String body, @RequestParam(name = "file") MultipartFile uploadedFile, Model model) {
+
+        String filename = uploadedFile.getOriginalFilename();
+        String filepath = Paths.get(uploadPath, filename).toString();
+        File destinationFile = new File(filepath);
+
+        try {
+            uploadedFile.transferTo(destinationFile);
+            model.addAttribute("message", "File successfully uploaded!");
+        } catch (IOException e) {
+            e.printStackTrace();
+            model.addAttribute("message", "Oops! Something went wrong! " + e);
+        }
+
+        Post newPost = new Post(title, body, filename);
+        long newPostView = newPost.getId();
         System.out.println(newPost);
         postDao.save(newPost);
         return "redirect:/posts";
     }
-
-//    Trying to create with a file uploaded: not finished
-//    @PostMapping("/posts/create")
-//    public String create(@RequestParam(name= "title") String title, @RequestParam(name="body") String body, Path image) {
-//        image = path;
-//        String imageString = image.toString();
-//        System.out.println(imageString);
-//
-//        Post newPost = new Post(title, body, imageString);
-//        System.out.println(newPost);
-////        postDao.save(newPost);
-//        return "redirect:/posts";
-//    }
 
 
     @GetMapping("/posts/delete")
@@ -108,56 +116,8 @@ public class PostController {
     }
 
 
-//    IMAGE UPLOADING:
-
-//    @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
-//    public String submit(@RequestParam("file") MultipartFile file, ModelMap modelMap) {
-//        modelMap.addAttribute("file", file);
-//        return "fileUploadView";
-//    }
-
-        private static String UPLOADED_FOLDER = "/static/uploaded-img/";
-
-        @GetMapping("/upload")
-        public String index() {
-            return "upload";
-        }
 
 
-//Path is out here so that it can be accessed in the create method
-        Path path;
-        @PostMapping("/upload")
-        public String singleFileUpload(@RequestParam("file") MultipartFile file,
-                                       RedirectAttributes redirectAttributes) {
-
-
-            if (file.isEmpty()) {
-                redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
-                return "redirect:uploadStatus";
-            }
-
-            try {
-
-                // Get the file and save it somewhere
-                byte[] bytes = file.getBytes();
-                path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
-                Files.write(path, bytes);
-
-
-                redirectAttributes.addFlashAttribute("message",
-                        "You successfully uploaded '" + file.getOriginalFilename() + "'");
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            return "redirect:/uploadStatus";
-        }
-
-    @GetMapping("/uploadStatus")
-    public String uploadStatus() {
-        return "uploadStatus";
-    }
 
 
 

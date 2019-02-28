@@ -41,7 +41,7 @@ public class UserController {
     }
 
 
-//  create a new user:
+//  create a new user with a profile picture:
     @Value("${file-upload-path}")
     private String uploadPath;
 

@@ -14,7 +14,6 @@ public class Post {
     private String body;
 
 
-//  TODO:add in feature to upload images:
     @Column
     private String image;
 
@@ -64,9 +63,7 @@ public class Post {
         this.id = id;
     }
 
-    public String getImage() {
-        return image;
-    }
+    public String getImage() { return image; }
 
     public void setImage(String image) {
         this.image = image;
