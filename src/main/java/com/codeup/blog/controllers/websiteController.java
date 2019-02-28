@@ -8,11 +8,11 @@ public class websiteController {
 
 
     // send to profile
-    @GetMapping("/profile")
-    public String usersProfile(){
-        return "profile";
-    }
-
+//    @GetMapping("/profile")
+//    public String usersProfile(){
+//        return "profile";
+//    }
+//
 
     // send to resume
     @GetMapping("/resume")

@@ -21,6 +21,11 @@
                         <li class="nav-item"><a class="nav-link" th:href="@{/posts/create}">Create Post</a></li>
                         <li class="nav-item"><a class="nav-link" th:href="@{/roll-dice}">Roll the Dice</a></li>
                         <li class="nav-item"><a class="nav-link" th:href="@{/profile}">Profile</a></li>
+                        <li>
+                            <form th:action="@{/logout}" th:method="post">
+                                <button class="btn-link btn" style="margin-top: 8px">Logout</button>
+                            </form>
+                        </li>
                     </ul>
                 </div>
             </nav>

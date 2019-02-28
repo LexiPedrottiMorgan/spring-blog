@@ -12,7 +12,6 @@
     <div th:each="post : ${posts}">
         <div class="row">
             <div class="col-lg-8 col-12">
-                <div class="card card-cascade narrower m-3 rare-wind-gradient">
                      <div class="card m-3" style="width: 100%;">
                          <div class="img-gradient">
                         <img src="/img/computer.jpg" class="card-img-top img-fluid" alt="computer" />
@@ -30,14 +29,14 @@
                                 <button th:value="${post.id}" th:name="id" class="btn btn-sm peach-gradient">Delete</button>
                             </form>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-</div>
+
+
 
 
 </body>

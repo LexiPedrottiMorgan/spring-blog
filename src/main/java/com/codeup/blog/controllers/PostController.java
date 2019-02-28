@@ -57,7 +57,7 @@ public class PostController {
     public String create(@RequestParam(name= "title") String title, @RequestParam(name="body") String body) {
         Post newPost = new Post(title, body);
         System.out.println(newPost);
-//        postDao.save(newPost);
+        postDao.save(newPost);
         return "redirect:/posts";
     }
 
