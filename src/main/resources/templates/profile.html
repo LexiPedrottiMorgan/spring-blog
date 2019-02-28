@@ -9,6 +9,7 @@
 
 <div class="container">
     <h1>Welcome, <span th:text="${user.username}"></span></h1>
+   <img th:src="${'/uploaded-img/' + user.profilePicture}"/>
 
 </div>
 </body>

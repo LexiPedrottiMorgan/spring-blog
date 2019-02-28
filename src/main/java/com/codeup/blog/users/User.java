@@ -19,13 +19,17 @@ import javax.persistence.*;
         @Column(nullable=false, length=150, unique=true)
         private String email;
 
+        @Column
+        private String profilePicture;
+
         //  default constructor
         public User(){}
 
-        public User(String username, String password, String email) {
+        public User(String username, String password, String email, String profilePicture) {
             this.username = username;
             this.password = password;
             this.email = email;
+            this.profilePicture = profilePicture;
         }
 
         public User(User copy) {
@@ -33,6 +37,7 @@ import javax.persistence.*;
             email = copy.email;
             username = copy.username;
             password = copy.password;
+            profilePicture = copy.profilePicture;
         }
 
         public long getId() {
@@ -65,6 +70,14 @@ import javax.persistence.*;
 
         public void setEmail(String email) {
             this.email = email;
+        }
+
+        public String getProfilePicture() {
+            return profilePicture;
+        }
+
+        public void setProfilePicture(String profilePicture) {
+            this.profilePicture = profilePicture;
         }
     }
 
