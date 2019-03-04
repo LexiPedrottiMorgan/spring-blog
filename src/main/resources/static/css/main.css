@@ -28,6 +28,8 @@ h1 {
     position: relative;
     overflow: hidden;
     border-radius: 50%;
+    /*-webkit-clip-path: circle(47.7% at 50% 50%);*/
+    /*clip-path: circle(47.7% at 50% 50%);*/
 
 }
 

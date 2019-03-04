@@ -3,6 +3,7 @@ package com.codeup.blog.controllers;
 import com.codeup.blog.users.User;
 import com.codeup.blog.users.repositories.Users;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;

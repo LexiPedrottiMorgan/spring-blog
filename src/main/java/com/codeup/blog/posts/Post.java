@@ -1,4 +1,6 @@
 package com.codeup.blog.posts;
+
+
 import javax.persistence.*;
 
 @Entity
@@ -10,12 +12,15 @@ public class Post {
     @Column(nullable=false, length=150)
     private String title;
 
-    @Column(nullable=false)
+    @Column(nullable=false, columnDefinition = "TEXT")
     private String body;
 
 
     @Column
     private String image;
+
+    @Column
+    private long user_id;
 
 
 //  default constructor
@@ -26,10 +31,11 @@ public class Post {
         this.body = body;
     }
 
-    public Post(String title, String body, String image) {
+    public Post(String title, String body, String image, long user_id) {
         this.title = title;
         this.body = body;
         this.image = image;
+        this.user_id = user_id;
     }
 
     public Post(String title, String body, long id) {
@@ -38,6 +44,12 @@ public class Post {
         this.id = id;
     }
 
+    public Post(String title, String body, long id, long user_id) {
+        this.title = title;
+        this.body = body;
+        this.id = id;
+        this.user_id = user_id;
+    }
 
     public String getTitle() {
         return title;
@@ -67,5 +79,13 @@ public class Post {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public long getUserId() {
+        return user_id;
+    }
+
+    public void setUserId(long user_id) {
+        this.user_id = user_id;
     }
 }

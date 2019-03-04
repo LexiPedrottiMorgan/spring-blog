@@ -1,16 +1,24 @@
 package com.codeup.blog.controllers;
 import com.codeup.blog.posts.Post;
 import com.codeup.blog.posts.PostRepository;
+import com.codeup.blog.services.EmailService;
 import com.codeup.blog.users.User;
+import com.codeup.blog.users.repositories.Users;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.context.request.SessionScope;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.thymeleaf.dom.Text;
+
 
 import java.io.File;
 import java.io.IOException;
@@ -28,6 +36,12 @@ public class PostController {
     public PostController(PostRepository postDao){
         this.postDao = postDao;
     }
+
+    @Autowired
+    private Users usersDao;
+
+    @Autowired
+    private EmailService emailService;
 
 
     //  posts page:
@@ -63,6 +77,11 @@ public class PostController {
     @PostMapping("/posts/create")
     public String create(@RequestParam(name= "title") String title, @RequestParam(name="body") String body, @RequestParam(name = "file") MultipartFile uploadedFile, Model model) {
 
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = ((UserDetails)principal).getUsername();
+        User user = usersDao.findByUsername(username);
+        long userId = user.getId();
+
         String filename = uploadedFile.getOriginalFilename();
         String filepath = Paths.get(uploadPath, filename).toString();
         File destinationFile = new File(filepath);
@@ -75,11 +94,12 @@ public class PostController {
             model.addAttribute("message", "Oops! Something went wrong! " + e);
         }
 
-        Post newPost = new Post(title, body, filename);
-        long newPostView = newPost.getId();
+        Post newPost = new Post(title, body, filename, userId);
         System.out.println(newPost);
-        postDao.save(newPost);
-        return "redirect:/posts";
+        Post savedPost = postDao.save(newPost);
+        long newPostView = savedPost.getId();
+        emailService.prepareAndSend(newPost, "Ad created successfully", "The ad was created with the id: " + newPost.getId());
+        return "redirect:/posts/" + newPostView;
     }
 
 
