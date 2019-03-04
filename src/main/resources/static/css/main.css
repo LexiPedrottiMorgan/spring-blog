@@ -16,11 +16,10 @@ h1 {
     width: auto;
 }
 
-/*not applying*/
-.white-border {
-    border-color: white;
-    border-width: 10px;
+#image-header {
+    height: 50px;
 }
+
 
 .image-cropper {
     width: 250px;

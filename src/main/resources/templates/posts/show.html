@@ -5,16 +5,17 @@
 
 <body>
 <div th:replace="fragments/navbar :: navbar"></div>
-<div>
-</div>
-<img th:src="${'/uploaded-img/posts/' + post.image}"/>
-    <div class="container">
-        <p>Title:</p>
-        <h2><span th:text="${post.title}"></span></h2>
 
-        <p>Body:</p>
-        <p><span th:text="${post.body}"></span></p>
+<div class="container">
+    <div class="card" style="width: 100%;">
+        <img class="card-img-top" th:src="${'/uploaded-img/posts/' + post.image}" alt="Card image cap" />
+        <div class="card-body">
+            <h1><span th:text="${post.title}"></span></h1>
+            <p class="card-text"><span th:text="${post.body}"></span></p>
+        </div>
     </div>
+</div>
+
 </body>
 </html>
 
