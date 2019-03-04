@@ -2,6 +2,7 @@ package com.codeup.blog.posts;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="posts")
@@ -21,6 +22,32 @@ public class Post {
 
     @Column
     private long user_id;
+
+
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name="posts_categories",
+            joinColumns={@JoinColumn(name="post_id")},
+            inverseJoinColumns={@JoinColumn(name="category_id")}
+    )
+    private List<PostCategory> categories;
+
+    @Entity
+    @Table(name="categories")
+    public class PostCategory {
+        @Id @GeneratedValue
+        private long id;
+
+        @Column(nullable=false)
+        private String category;
+
+        @ManyToMany(mappedBy="categories")
+        private List<Post> posts;
+    }
+
+
+
 
 
 //  default constructor
@@ -88,4 +115,6 @@ public class Post {
     public void setUserId(long user_id) {
         this.user_id = user_id;
     }
+
+
 }

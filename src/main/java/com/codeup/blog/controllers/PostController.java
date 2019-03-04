@@ -58,6 +58,9 @@ public class PostController {
     public String show(@PathVariable long id, Model model) {
         Post post = postDao.findOne(id);
         model.addAttribute("post", post);
+    //  to display the username on the post for author
+        String username = usersDao.findOne(post.getUserId()).getUsername();
+        model.addAttribute("username", username);
         return "posts/show";
     }
 
@@ -99,6 +102,7 @@ public class PostController {
         Post savedPost = postDao.save(newPost);
         long newPostView = savedPost.getId();
         emailService.prepareAndSend(newPost, "Ad created successfully", "The ad was created with the id: " + newPost.getId());
+
         return "redirect:/posts/" + newPostView;
     }
 

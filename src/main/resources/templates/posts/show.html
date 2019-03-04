@@ -11,6 +11,7 @@
         <img class="card-img-top" th:src="${'/uploaded-img/posts/' + post.image}" alt="Card image cap" />
         <div class="card-body">
             <h1><span th:text="${post.title}"></span></h1>
+            <p><em>by <span th:text="${username}"></span></em></p>
             <p class="card-text"><span th:text="${post.body}"></span></p>
         </div>
     </div>
