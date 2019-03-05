@@ -1,6 +1,8 @@
 package com.codeup.blog.posts;
 
 
+import com.codeup.blog.category.Category;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -24,33 +26,22 @@ public class Post {
     private long user_id;
 
 
-
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name="posts_categories",
             joinColumns={@JoinColumn(name="post_id")},
             inverseJoinColumns={@JoinColumn(name="category_id")}
     )
-    private List<PostCategory> categories;
 
-    @Entity
-    @Table(name="categories")
-    public class PostCategory {
-        @Id @GeneratedValue
-        private long id;
 
-        @Column(nullable=false)
-        private String category;
-
-        @ManyToMany(mappedBy="categories")
-        private List<Post> posts;
-    }
+    private List<Category> categories;
 
 
 
 
 
-//  default constructor
+
+    //  default constructor
     public Post(){}
 
     public Post(String title, String body) {
@@ -63,6 +54,14 @@ public class Post {
         this.body = body;
         this.image = image;
         this.user_id = user_id;
+    }
+
+    public Post(String title, String body, String image, long user_id, List<Category> categories) {
+        this.title = title;
+        this.body = body;
+        this.image = image;
+        this.user_id = user_id;
+        this.categories = categories;
     }
 
     public Post(String title, String body, long id) {
@@ -116,5 +115,11 @@ public class Post {
         this.user_id = user_id;
     }
 
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
+    }
 
+    public List<Category> getCategories() {
+        return categories;
+    }
 }

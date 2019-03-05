@@ -18,6 +18,9 @@
                          </div>
                     <div class="card-body">
                         <h3 class="fancy-serif"><span th:text="${post.title}"></span></h3>
+                        <div th:each="category : ${post.categories}">
+                            <h3 class="pink-text pb-2 pt-1"><span th:class="${category.icon}"></span></h3>
+                        </div>
                         <hr />
                         <p><span th:text="${post.body}"></span></p>
                         <div class="btn-container">

@@ -19,73 +19,23 @@
                 <textarea name="body" type="text" class="form-control" id="body" placeholder="Enter post body here"/>
             </div>
             <div class="form-group">
-                <h3>Categories:</h3><br/>
+            <h4>Categories:</h4><br/>
                 <div class="container">
                     <div class="row">
                         <div class="col-12 m-2">
-                                <input type="checkbox" name="code" value="code">Code <i class="fas fa-code"></i></input>
-                                <input type="checkbox" name="android" value="android">Android <i class="fab fa-android"></i></input>
-                                <input type="checkbox" name="apple" value="apple">Apple <i class="fab fa-apple"></i></input>
-                                <input type="checkbox" name="phone" value="phone">Phone <i class="fas fa-mobile-alt"></i></input>
-                                <input type="checkbox" name="memory" value="memory">Memory <i class="fas fa-memory"></i></input>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm m-2 p-2">
-                                <input type="checkbox" name="news" value="news">News <i class="far fa-newspaper"></i></input>
-                                <input type="checkbox" name="file" value="file">Files <i class="far fa-file-alt"></i></input>
-                                <input type="checkbox" name="amazon" value="amazon">Amazon <i class="fab fa-amazon"></i></input>
-                                <input type="checkbox" name="angular" value="angular">Angular <i class="fab fa-angular"></i></input>
-                                <input type="checkbox" name="app-store" value="app-store">App Store <i class="fab fa-app-store"></i></input>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm m-2 p-2">
-                                <input type="checkbox" name="award" value="award">Award <i class="fas fa-award"></i></input>
-                                <input type="checkbox" name="balance" value="balance">Balance <i class="fas fa-balance-scale"></i></input>
-                                <input type="checkbox" name="battery" value="battery">Battery <i class="fas fa-battery-half"></i></input>
-                                <input type="checkbox" name="bitcoin" value="bitcoin">Bitcoin <i class="fab fa-bitcoin"></i></input>
-                                <input type="checkbox" name="bluetooth" value="bluetooth">Bluetooth <i class="fab fa-bluetooth"></i></input>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm m-2 p-2">
-                                <input type="checkbox" name="cutting-edge" value="cutting-edge">Cutting Edge <i class="fas fa-bolt"></i></input>
-                                <input type="checkbox" name="cutting-edge" value="cutting-edge">Cutting Edge <i class="fas fa-bolt"></i></input>
-                                <input type="checkbox" name="bug-fix" value="bug-fix">Bug Fix <i class="fas fa-bug"></i></input>
-                                <input type="checkbox" name="camera" value="camera">Camera <i class="fas fa-camera-retro"></i></input>
-                                <input type="checkbox" name="car-tech" value="car-tech">Car Tech <i class="fas fa-car-side"></i></input>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm m-2 p-2">
-                                <input type="checkbox" name="growth" value="growth">Growth Potential <i class="fas fa-chart-line"></i></input>
-                                <input type="checkbox" name="funded" value="funded">Funded <i class="fas fa-dollar-sign"></i></input>
-                                <input type="checkbox" name="rising-star" value="rising-star">Rising Star <i class="far fa-grin-stars"></i></input>
-                                <input type="checkbox" name="watch" value="watch">Watch <i class="far fa-eye"></i></input>
-                                <input type="checkbox" name="ai" value="ai">Ai <i class="fas fa-brain"></i></input>
+                            <div th:each="category : ${categories}">
+                                 <input type="checkbox" name="category" th:value="${category.id}"><span th:text="${category.category}"></span><i th:class="${category.icon}"></i></input>
                             </div>
                         </div>
                     </div>
                 </div>
-            <div>
-                <h3>Upload an Image:</h3><br/>
-            <!--image upload-->
-                <input type="file" name="file" /><br/><br/>
-            <!--submit post to db:-->
-                <input type="submit" class="btn btn-primary" value="create"/>
             </div>
+            <div>
+                <!--image upload-->
+                <input type="file" name="file" /><br/><br/>
+            </div>
+            <button class="btn peach-gradient">Create</button>
         </form>
-</div>
-
-
+    </div>
 </body>
 </html>
