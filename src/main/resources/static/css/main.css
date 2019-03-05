@@ -21,6 +21,15 @@ h1 {
 }
 
 
+.icons{
+    display: inline-block;
+    height: 2em;
+    width: 2em;
+    margin: 20px;
+    font-size: 50px;
+}
+
+
 .image-cropper {
     width: 250px;
     height: 250px;

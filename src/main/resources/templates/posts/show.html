@@ -11,9 +11,9 @@
         <img class="card-img-top" th:src="${'/uploaded-img/posts/' + post.image}" alt="Card image cap" />
         <div class="card-body">
             <h1><span th:text="${post.title}"></span></h1>
-            <div th:each="category : ${post.categories}">
-                <h3 class="pink-text pb-2 pt-1"><span th:class="${category.icon}"></span></h3>
-            </div>
+                 <span th:each="category : ${post.categories}">
+                     <span class="pink-text pb-2 pt-1 fa-2x m-2"><span class="icons" th:class="${category.icon}"></span></span>
+                 </span>
             <hr />
             <p><em>by <span th:text="${username}"></span></em></p>
             <p class="card-text"><span th:text="${post.body}"></span></p>
