@@ -10,7 +10,7 @@
     <h1>Posts:</h1>
     <div th:each="post : ${posts}">
         <div class="row">
-            <div class="col-lg-8 col-12">
+            <div class="col-lg-12 col-12">
                      <div class="card m-3" style="width: 100%;">
                          <div class="view view-cascade">
                              <img th:src="${'/uploaded-img/posts/' + post.image}" class="card-img-top img-fluid"/>

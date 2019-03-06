@@ -7,10 +7,15 @@
 <div th:replace="fragments/navbar :: navbar"></div>
 
 <div class="container">
-    <div class="card" style="width: 100%;">
+    <div class="card card-cascade wider reverse">
+        <div class="view view-cascade overlay">
         <img class="card-img-top" th:src="${'/uploaded-img/posts/' + post.image}" alt="Card image cap" />
-        <div class="card-body">
-            <h1><span th:text="${post.title}"></span></h1>
+            <a href="#!">
+                <div class="mask rgba-white-slight"></div>
+            </a>
+        </div>
+        <div class="card-body card-body-cascade text-center">
+            <h1 class="card-title"><span th:text="${post.title}"></span></h1>
                  <span th:each="category : ${post.categories}">
                      <span class="pink-text pb-2 pt-1 fa-2x m-2"><span class="icons" th:class="${category.icon}"></span></span>
                  </span>

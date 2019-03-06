@@ -77,6 +77,7 @@ public class UserController {
     @GetMapping("/profile")
     public String currentUser(Model model){
     User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
     User dbUser = users.findOne(loggedInUser.getId());
     model.addAttribute("user", dbUser);
 //  get the users ads and display them on the users page:
