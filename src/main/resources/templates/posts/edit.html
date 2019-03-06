@@ -12,16 +12,16 @@
     <form th:action="@{/posts/edit}" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="title">Title</label>
-            <input name="title" type="text" class="form-control" id="title" th:value="${posts.title}"/>
+            <input name="title" type="text" class="form-control" id="title" th:value="${post.title}"/>
         </div>
         <div class="form-group">
             <label for="body">Body</label>
-            <textarea name="body" type="text" class="form-control" id="body" th:text="${posts.body}"></textarea>
+            <textarea name="body" type="text" class="form-control" id="body" th:text="${post.body}"></textarea>
         </div>
 
             <!--image upload-->
             <input type="file" name="file" /><br/><br/>
-            <button th:value="${posts.id}" th:name="id" class="btn peach-gradient">Save Changes</button>
+            <button th:value="${post.id}" th:name="id" class="btn peach-gradient">Save Changes</button>
     </form>
 </div>
 
