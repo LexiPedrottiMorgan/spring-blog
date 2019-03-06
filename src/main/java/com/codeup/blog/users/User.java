@@ -25,18 +25,22 @@ import java.util.List;
         @Column
         private String profilePicture;
 
+        @Column
+        private String colorScheme;
+
         @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
         private List<Post> posts;
 
         //  default constructor
         public User(){}
 
-        public User(String username, String password, String email, String profilePicture, List <Post> posts) {
+        public User(String username, String password, String email, String profilePicture, List <Post> posts, String colorScheme) {
             this.username = username;
             this.password = password;
             this.email = email;
             this.profilePicture = profilePicture;
             this.posts = posts;
+            this.colorScheme = colorScheme;
         }
 
         public User(User copy) {
@@ -94,6 +98,14 @@ import java.util.List;
 
     public void setPosts(List<Post> posts) {
         this.posts = posts;
+    }
+
+    public String getColorScheme() {
+        return colorScheme;
+    }
+
+    public void setColorScheme(String colorScheme) {
+        this.colorScheme = colorScheme;
     }
 }
 

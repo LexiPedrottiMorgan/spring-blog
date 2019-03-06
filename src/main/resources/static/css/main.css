@@ -14,6 +14,7 @@ h1 {
 
 .image-header {
     width: auto;
+    background-color: red;
 }
 
 #image-header {
@@ -33,10 +34,14 @@ h1 {
     font-size: 50px;
 }
 
+.profile {
+    width: auto;
+    margin: 2em;
+}
 
 .image-cropper {
-    width: 250px;
-    height: 250px;
+    width: 10em;
+    height: 10em;
     position: relative;
     overflow: hidden;
     border-radius: 50%;

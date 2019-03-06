@@ -52,7 +52,7 @@ public class UserController {
 
 
     @PostMapping("/sign-up")
-    public String saveUser(@ModelAttribute User user, @RequestParam(name = "file") MultipartFile uploadedFile, Model model) {
+    public String saveUser(@ModelAttribute User user, @RequestParam(name = "file") MultipartFile uploadedFile, Model model, @RequestParam(name="colorScheme") String colorScheme) {
         String hash = passwordEncoder.encode(user.getPassword());
         user.setPassword(hash);
 
@@ -68,6 +68,7 @@ public class UserController {
         }
 
         user.setProfilePicture(filename);
+        user.setColorScheme(colorScheme);
         users.save(user);
         return "redirect:/login";
     }
@@ -76,8 +77,8 @@ public class UserController {
     @GetMapping("/profile")
     public String currentUser(Model model){
     User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    model.addAttribute("user", loggedInUser);
     User dbUser = users.findOne(loggedInUser.getId());
+    model.addAttribute("user", dbUser);
 //  get the users ads and display them on the users page:
     List <Post> usersPosts = dbUser.getPosts();
     model.addAttribute("usersPosts", usersPosts);

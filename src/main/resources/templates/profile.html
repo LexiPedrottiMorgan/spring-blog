@@ -6,61 +6,68 @@
 <body>
 <div th:replace="fragments/navbar :: navbar"></div>
 
-<!--Section: Testimonials-->
-<section class="text-center">
-
-        <!--Grid column-->
-        <div class="col-lg-4 col-md-6 mb-4">
-
-            <!--Card-->
-                <!--Background color-->
-                <div class="card-up rainy-ashville-gradient">
-                    <div class="card testimonial-card">
-                </div>
-
-                <!--Avatar-->
-                <div class="avatar mx-auto image-cropper"><img th:src="${'/uploaded-img/' + user.profilePicture}" class="image-avatar img-responsive" alt="Example photo" />
-                </div>
-
-                <div class="card-body">
-                    <!--Name-->
-                    <h4 class="card-title mt-1"><span th:text="${user.username}"></span></h4>
-                    <hr />
-                    <!--Quotation-->
-                    <p><i class="fas fa-quote-left"></i> Neque cupiditate assumenda in maiores repudiandae mollitia architecto. <i class="fas fa-quote-right"></i></p>
-                </div>
-
-            </div>
-            <!--Card-->
-
-    </div>
-
-</section>
-<!--Section: Testimonials-->
-
-<div th:each="post : ${usersPosts}">
+<div class="profile">
+    <!--profile picture goes here-->
     <div class="row">
-        <div class="col-lg-8 col-12">
-            <div class="card m-3" style="width: 100%;">
-                <div class="view view-cascade">
-                    <img th:src="${'/uploaded-img/posts/' + post.image}" class="card-img-top img-fluid"/>
-                </div>
-                <div class="card-body">
-                    <h3 class="fancy-serif"><span th:text="${post.title}"></span></h3>
-                    <span th:each="category : ${post.categories}">
-                            <span class="pink-text pb-2 pt-1 fa-2x m-2"><span th:class="${category.icon}"></span></span>
-                        </span>
-                    <hr />
-                    <div class="btn-container">
-                        <a th:href="@{'/posts/' + ${post.id}}" class="btn btn-sm purple-gradient">Read</a>
-                        <form th:action="@{/posts/edit}" th:method="get">
-                            <button th:value="${post.id}" th:name="id" class="btn btn-sm aqua-gradient">Edit</button>
-                        </form>
-                        <form th:action="@{/posts/delete}" th:method="post">
-                            <button th:value="${post.id}" th:name="id" class="btn btn-sm peach-gradient">Delete</button>
-                        </form>
+        <div class="col-5">
+                <!--Section: Testimonials-->
+                <section class="text-center">
+                        <!--Grid column-->
+                        <div class="col-lg-8 col-md-12 col-sm-12 mb-12">
+                            <!--Card-->
+                                <!--Background color-->
+                                <div th:class="${user.colorScheme}">
+                                    <div class="card testimonial-card">
+                                </div>
+
+                                <!--Avatar-->
+                                <div class="avatar mx-auto image-cropper"><img th:src="${'/uploaded-img/' + user.profilePicture}" class="image-avatar img-responsive" alt="Example photo" />
+                                </div>
+
+                                <div class="card-body">
+                                    <!--Name-->
+                                    <h4 class="card-title mt-1"><span th:text="${user.username}"></span></h4>
+                                    <hr />
+                                    <!--Quotation-->
+                                    <p><i class="fas fa-quote-left"></i> Neque cupiditate assumenda in maiores repudiandae mollitia architecto. <i class="fas fa-quote-right"></i></p>
+                                </div>
+
+                            </div>
+                            <!--Card-->
+        </div>
+    </section>
+        </div>
+        <!--Users posts go here-->
+        <div class="col-7">
+            <div class="container">
+            <h1>Here are your posts:</h1>
+            <div th:each="post : ${usersPosts}">
+                <div class="row">
+                    <div class="col-lg-12 col-12">
+                        <div class="card m-3" style="width: 100%;">
+                            <div class="view view-cascade">
+                                <img th:src="${'/uploaded-img/posts/' + post.image}" class="card-img-top img-fluid"/>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="fancy-serif"><span th:text="${post.title}"></span></h3>
+                                <span th:each="category : ${post.categories}">
+                                        <span class="pink-text pb-2 pt-1 fa-2x m-2"><span th:class="${category.icon}"></span></span>
+                                    </span>
+                                <hr />
+                                <div class="btn-container">
+                                    <a th:href="@{'/posts/' + ${post.id}}" class="btn btn-sm purple-gradient">Read</a>
+                                    <form th:action="@{/posts/edit}" th:method="get">
+                                        <button th:value="${post.id}" th:name="id" class="btn btn-sm aqua-gradient">Edit</button>
+                                    </form>
+                                    <form th:action="@{/posts/delete}" th:method="post">
+                                        <button th:value="${post.id}" th:name="id" class="btn btn-sm peach-gradient">Delete</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
     </div>

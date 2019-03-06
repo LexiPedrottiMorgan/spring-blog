@@ -24,14 +24,28 @@
             <label for="password">Password</label>
             <input th:field="*{password}" type="password" class="form-control" id="password" placeholder="Enter password"/>
         </div>
+        <div  class="form-group">
+            <label>Color Scheme</label>
+            <select name="colorScheme">
+                <option th:value="purple-gradient">Purple</option>
+                <option th:value="aqua-gradient">Aqua</option>
+                <option th:value="peach-gradient">Peach</option>
+                <option th:value="winter-neva-gradient">Winter</option>
+                <option th:value="dusty-grass-gradient">Grass</option>
+                <option th:value="amy-crisp-gradient">Crisp</option>
+                <option th:value="deep-blue-gradient">Peaceful</option>
+                <option th:value="ripe-malinka-gradient">Energize</option>
+                <option th:value="morpheus-den-gradient">Dusk</option>
+                <option th:value="rare-wind-gradient">Light</option>
+            </select>
+        </div>
 
             <label for="file">Upload a Profile Picture</label>
             <input id="file" name="file" type="file" />
             <br />
-            <!--<input type="submit" value="upload" />-->
+
 
         <input value="Sign me up!" type="submit" />
-        <!--</form>-->
     </form>
 </div>
 </div>
