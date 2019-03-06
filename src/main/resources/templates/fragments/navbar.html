@@ -7,8 +7,8 @@
 <body>
 <h1>This is a template for the Navbar</h1>
         <th:block th:fragment="navbar">
-            <nav class="sticky-top navbar navbar-light navbar-expand-lg" style="background-color: #fa7268;">
-                <a class="navbar-brand" href="/">BlogNameHere</a>
+            <nav class="sticky-top navbar navbar-light navbar-expand-lg peach-gradient">
+                <a class="navbar-brand fancy-serif" href="/"><i class="fas fa-code"></i> Lexi Morgan</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -21,8 +21,10 @@
                         <li class="nav-item"><a class="nav-link" th:href="@{/posts/create}">Create Post</a></li>
                         <li class="nav-item"><a class="nav-link" th:href="@{/roll-dice}">Roll the Dice</a></li>
                         <li class="nav-item"><a class="nav-link" th:href="@{/profile}">Profile</a></li>
+                        <li class="nav-item"><a class="nav-link" th:href="@{/login}">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" th:href="@{/sign-up}">Sign Up!</a></li>
                         <li>
-                            <form th:action="@{/logout}" th:method="post">
+                            <form th:action="@{/logout}" th:method="posts">
                                 <button class="btn-link btn" style="margin-top: 8px">Logout</button>
                             </form>
                         </li>

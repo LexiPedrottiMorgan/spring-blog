@@ -7,18 +7,18 @@
 <div th:replace="fragments/navbar :: navbar"></div>
 <div>
     <!--TODO: add in images-->
-    <!--<img th:src="${post.image}" class="image-header" alt="computer" />-->
+    <!--<img th:src="${posts.image}" class="image-header" alt="computer" />-->
 </div>
 <div class="container">
-    <form th:action="@{/posts/delete/${post.id}}" method="post">
+    <form th:action="@{/posts/delete/${posts.id}}" method="post">
         <h1>Are you sure you want to delete this ad?</h1>
 
         <div class="container">
             <h3>Title</h3>
-            <p><span th:text="${post.title}"></span></p>
+            <p><span th:text="${posts.title}"></span></p>
 
             <h3>Body</h3>
-            <p><span th:text="${post.body}"></span></p>
+            <p><span th:text="${posts.body}"></span></p>
         </div>
         <a th:href="@{'/posts/delete/success'}" class="btn btn-sm btn-outline-danger">Delete</a>
         <a th:href="@{'/posts'}" class="btn btn-sm btn-outline-secondary">No, back to Posts</a>

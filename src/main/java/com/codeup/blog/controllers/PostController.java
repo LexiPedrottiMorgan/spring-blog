@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -49,21 +50,6 @@ public class PostController {
     public String all(Model model) {
         Iterable<Post> posts = postDao.findAll();
         model.addAttribute("posts", posts);
-//        get the logged in user to see if they are the owner of the posts to decide which buttons to show:
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String username = ((UserDetails)principal).getUsername();
-        User user = usersDao.findByUsername(username);
-        long userId = user.getId();
-
-        boolean showEditDelete = false;
-        for(Post post : posts){
-            if(userId == post.getUserId()){
-                showEditDelete = true;
-            } else {
-                showEditDelete = false;
-            }
-        }
-        model.addAttribute("showEditDelete", showEditDelete);
         return "posts/index";
     }
 
@@ -74,9 +60,6 @@ public class PostController {
     public String show(@PathVariable long id, Model model) {
         Post post = postDao.findOne(id);
         model.addAttribute("post", post);
-    //  to display the username on the post for author
-        String username = usersDao.findOne(post.getUserId()).getUsername();
-        model.addAttribute("username", username);
         return "posts/show";
     }
 
@@ -93,7 +76,7 @@ public class PostController {
 
 //  create a new post with an image upload:
 //  this is the file upload path to be used in uploading post pictures:
-    @Value("${post-file-upload-path}")
+    @Value("${posts-file-upload-path}")
     private String uploadPath;
 
     @PostMapping("/posts/create")
@@ -116,7 +99,7 @@ public class PostController {
             model.addAttribute("message", "Oops! Something went wrong! " + e);
         }
 
-        Post newPost = new Post(title, body, filename, userId);
+        Post newPost = new Post(title, body, filename, user);
         List <Category> saveCategories = categories;
         System.out.println(newPost);
         newPost.setCategories(saveCategories);
@@ -124,7 +107,6 @@ public class PostController {
         long newPostView = savedPost.getId();
 //        sends a confirmation email to the user that the post was created
         emailService.prepareAndSend(newPost, "Post created successfully", "The post was created with the id: " + newPost.getId());
-
         return "redirect:/posts/" + newPostView;
     }
 

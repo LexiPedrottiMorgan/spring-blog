@@ -2,6 +2,7 @@ package com.codeup.blog.posts;
 
 
 import com.codeup.blog.category.Category;
+import com.codeup.blog.users.User;
 
 import javax.persistence.*;
 import java.util.List;
@@ -22,8 +23,9 @@ public class Post {
     @Column
     private String image;
 
-    @Column
-    private long user_id;
+    @ManyToOne
+    @JoinColumn (name = "user_id")
+    private User user;
 
 
     @ManyToMany(cascade = CascadeType.ALL)
@@ -49,18 +51,18 @@ public class Post {
         this.body = body;
     }
 
-    public Post(String title, String body, String image, long user_id) {
+    public Post(String title, String body, String image, User user) {
         this.title = title;
         this.body = body;
         this.image = image;
-        this.user_id = user_id;
+        this.user = user;
     }
 
-    public Post(String title, String body, String image, long user_id, List<Category> categories) {
+    public Post(String title, String body, String image, User user, List<Category> categories) {
         this.title = title;
         this.body = body;
         this.image = image;
-        this.user_id = user_id;
+        this.user = user;
         this.categories = categories;
     }
 
@@ -70,11 +72,11 @@ public class Post {
         this.id = id;
     }
 
-    public Post(String title, String body, long id, long user_id) {
+    public Post(String title, String body, long id, User user) {
         this.title = title;
         this.body = body;
         this.id = id;
-        this.user_id = user_id;
+        this.user= user;
     }
 
     public String getTitle() {
@@ -107,12 +109,12 @@ public class Post {
         this.image = image;
     }
 
-    public long getUserId() {
-        return user_id;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(long user_id) {
-        this.user_id = user_id;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public void setCategories(List<Category> categories) {

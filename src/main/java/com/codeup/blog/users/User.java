@@ -1,9 +1,12 @@
 package com.codeup.blog.users;
 
+import com.codeup.blog.posts.Post;
+
 import javax.persistence.*;
+import java.util.List;
 
 
-    @Entity
+@Entity
     @Table(name="users")
     public class User {
         @Id
@@ -22,14 +25,18 @@ import javax.persistence.*;
         @Column
         private String profilePicture;
 
+        @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+        private List<Post> posts;
+
         //  default constructor
         public User(){}
 
-        public User(String username, String password, String email, String profilePicture) {
+        public User(String username, String password, String email, String profilePicture, List <Post> posts) {
             this.username = username;
             this.password = password;
             this.email = email;
             this.profilePicture = profilePicture;
+            this.posts = posts;
         }
 
         public User(User copy) {
@@ -38,6 +45,7 @@ import javax.persistence.*;
             username = copy.username;
             password = copy.password;
             profilePicture = copy.profilePicture;
+            posts = copy.posts;
         }
 
         public long getId() {
@@ -79,5 +87,13 @@ import javax.persistence.*;
         public void setProfilePicture(String profilePicture) {
             this.profilePicture = profilePicture;
         }
+
+    public List<Post> getPosts() {
+        return posts;
     }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
+}
 

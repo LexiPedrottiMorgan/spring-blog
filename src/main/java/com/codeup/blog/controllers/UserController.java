@@ -1,9 +1,11 @@
 package com.codeup.blog.controllers;
 
+import com.codeup.blog.posts.Post;
+import com.codeup.blog.posts.PostRepository;
 import com.codeup.blog.users.User;
 import com.codeup.blog.users.repositories.Users;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -13,11 +15,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.List;
 
 
 @Controller
@@ -32,6 +34,8 @@ public class UserController {
         this.passwordEncoder = passwordEncoder;
     }
 
+    @Autowired
+    private PostRepository postDao;
 
 
 //  view form to create a user:
@@ -73,6 +77,10 @@ public class UserController {
     public String currentUser(Model model){
     User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     model.addAttribute("user", loggedInUser);
+    User dbUser = users.findOne(loggedInUser.getId());
+//  get the users ads and display them on the users page:
+    List <Post> usersPosts = dbUser.getPosts();
+    model.addAttribute("usersPosts", usersPosts);
     return "profile";
     }
 

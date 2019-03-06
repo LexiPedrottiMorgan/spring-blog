@@ -26,4 +26,11 @@ VALUES
 ('Ai', 'fas fa-brain')
 ;
 
+INSERT INTO users (username, password, profile_picture)
+VALUES
+('username', 'password', 'slack-imgs.jpg');
 
+
+INSERT INTO posts (title, body, image, user_id))
+VALUES
+('title', 'body', 'slack-imgs.jpg', 1);
