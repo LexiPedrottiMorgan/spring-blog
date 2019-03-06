@@ -49,13 +49,23 @@ public class PostController {
     public String all(Model model) {
         Iterable<Post> posts = postDao.findAll();
         model.addAttribute("posts", posts);
+//        get the logged in user to see if they are the owner of the posts to decide which buttons to show:
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = ((UserDetails)principal).getUsername();
+        User user = usersDao.findByUsername(username);
+        long userId = user.getId();
+
+        boolean showEditDelete = false;
+        for(Post post : posts){
+            if(userId == post.getUserId()){
+                showEditDelete = true;
+            } else {
+                showEditDelete = false;
+            }
+        }
+        model.addAttribute("showEditDelete", showEditDelete);
         return "posts/index";
     }
-
-//    for each post we need the id
-//    then we need to find the categry_id for each post id
-//    then create a list of categories associated with each post
-
 
 
 
