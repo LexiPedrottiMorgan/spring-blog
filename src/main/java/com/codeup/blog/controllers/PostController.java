@@ -76,7 +76,7 @@ public class PostController {
 
 //  create a new post with an image upload:
 //  this is the file upload path to be used in uploading post pictures:
-    @Value("${posts-file-upload-path}")
+    @Value("${file-upload-path}")
     private String uploadPath;
 
     @PostMapping("/posts/create")
